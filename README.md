@@ -108,6 +108,25 @@ The models are evaluated using:
 
 Performance depends on the dataset, model configuration and training process. The current dataset is relatively small, so predictions may not always be accurate.
 
+### 📈 Latest Training Results
+
+The following results were obtained from the latest training run using 206 built-in sentences and a vocabulary of 363 words.
+
+| Model | Training Accuracy | Validation Accuracy | Top-3 Accuracy | Perplexity | Epochs |
+|---|---:|---:|---:|---:|---:|
+| RNN | 54% | 28% | 37% | 98.6 | 37 |
+| LSTM | 53% | 27% | 39% | 158.0 | 41 |
+| GRU | 31% | 23% | 32% | 122.9 | 34 |
+| BiLSTM | 62% | 26% | 34% | 215.7 | 41 |
+
+**Observations:**
+- RNN achieved the highest validation accuracy at 28% and the lowest perplexity at 98.6 in this run.
+- LSTM achieved the highest top-3 accuracy at 39%.
+- BiLSTM achieved the highest training accuracy at 62%, but its validation accuracy was 26%.
+- The difference between training and validation results suggests that generalization needs improvement.
+
+*Note: These are results from one training run on a relatively small dataset. They may vary when the models are retrained. Validation accuracy is not a guarantee of performance on unseen real-world text.*
+
 ## ⚠️ Limitations
 
 - The training dataset contains a limited number of sentences.
@@ -128,7 +147,3 @@ Performance depends on the dataset, model configuration and training process. Th
 **BhSarma**
 
 GitHub: [@BhSarma](https://github.com/BhSarma)
-
----
-
-*An academic deep learning project exploring next-word prediction and recurrent neural network architectures.*
