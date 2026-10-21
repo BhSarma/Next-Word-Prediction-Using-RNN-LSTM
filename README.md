@@ -1,149 +1,273 @@
-# 🔮 Next Word Prediction Using RNN, LSTM, GRU and BiLSTM
-
-An interactive deep learning application that predicts the next word in a sentence using four recurrent neural network architectures: RNN, LSTM, GRU and Bidirectional LSTM (BiLSTM).
-
-The project includes next-word prediction, sentence generation, model comparison, and training performance visualization through a Streamlit web interface.
-
-## ✨ Features
-
-- **Next Word Prediction:** Predicts likely next words from user-provided text.
-- **Sentence Generation:** Generates text from starting words with a configurable creativity setting.
-- **Model Comparison:** Compares predictions from RNN, LSTM, GRU and BiLSTM.
-- **Training Results:** Displays training accuracy, validation accuracy, top-3 accuracy, perplexity, epochs and training time.
-- **Visualizations:** Shows validation loss and validation accuracy graphs.
-- **Interactive Interface:** Provides a user-friendly Streamlit application.
-
-## 🧠 Models Used
-
-| Model | Description |
-|---|---|
-| RNN | Recurrent Neural Network |
-| LSTM | Long Short-Term Memory |
-| GRU | Gated Recurrent Unit |
-| BiLSTM | Bidirectional Long Short-Term Memory |
+# # # 🧠 Next Word Prediction Using RNN, LSTM, GRU and BiLSTM
 
 ## 🛠️ Technologies Used
 
-- Python
-- Deep Learning
-- Recurrent Neural Networks
-- Streamlit
-- Pandas
-- NumPy
-- Matplotlib
+- 🐍 **Python** – Core programming language
+- 🧠 **TensorFlow & Keras** – Deep learning model development
+- 🔢 **NumPy** – Numerical computations
+- 🐼 **Pandas** – Data handling and processing
+- 📚 **NLTK** – Natural language processing and corpus resources
+- 🌐 **Streamlit** – Interactive web application
+- 💬 **NLP** – Text preprocessing and next-word prediction
+- 🤖 **Deep Learning** – Sequence modelling using recurrent neural networks
 
 ## 📂 Project Structure
 
 ```text
 Next-Word-Prediction-Using-RNN-LSTM/
-├── artifacts/       # Saved models and training metrics
-├── web/             # Streamlit application
-├── data.py          # Training sentences
-├── main.py          # Model training and evaluation
-├── requirements.txt # Python dependencies
-├── README.md        # Project documentation
-└── .gitignore       # Files excluded from Git
+│
+├── 📁 artifacts/          # Saved models, vocabulary and metrics
+├── 📁 web/
+│   └── 🐍 app.py          # Streamlit web application
+├── 🐍 data.py             # Built-in training sentences
+├── 🐍 main.py             # Training and evaluation pipeline
+├── 📄 requirements.txt    # Project dependencies
+├── 📄 README.md           # Project documentation
+└── 📄 corpus.txt          # Optional text corpus
 ```
 
-## ⚙️ Installation and Setup
+## ✨ Features
 
-### 1. Clone the repository
+- 🎯 Next-word prediction from user input
+- 🧠 Four models: RNN, LSTM, GRU and BiLSTM
+- 📊 Prediction confidence and alternative word suggestions
+- ✍️ Text generation using repeated next-word predictions
+- ⚖️ Side-by-side model comparison
+- 📈 Training results and evaluation metrics
+- 💾 Saved model artifacts for inference
+- 🔄 Model retraining support
 
-```bash
-git clone https://github.com/BhSarma/Next-Word-Prediction-Using-RNN-LSTM.git
-cd Next-Word-Prediction-Using-RNN-LSTM
-```
+## 📊 Training Results
 
-### 2. Create a virtual environment
-
-```bash
-python -m venv venv
-```
-
-Activate it on Windows:
-
-```powershell
-.\venv\Scripts\Activate.ps1
-```
-
-### 3. Install dependencies
-
-```bash
-pip install -r requirements.txt
-```
-
-### 4. Train the models
-
-```bash
-python main.py --retrain
-```
-
-This command trains the available models and saves the generated artifacts. Training time depends on your system.
-
-### 5. Run the Streamlit application
-
-If `app.py` is inside the `web` folder, run:
-
-```bash
-streamlit run web/app.py
-```
-
-If your `app.py` is in the project root, run:
-
-```bash
-streamlit run app.py
-```
-
-Open the local URL displayed in the terminal.
-
-## 📊 Model Evaluation
-
-The models are evaluated using:
-
-- **Training Accuracy:** Accuracy on training samples.
-- **Validation Accuracy:** Accuracy on held-out validation samples.
-- **Top-3 Accuracy:** Whether the correct next word appears among the top three predictions.
-- **Perplexity:** A measure of uncertainty in language prediction; lower is generally better.
-- **Training Time and Epochs:** Measures of training cost.
-
-Performance depends on the dataset, model configuration and training process. The current dataset is relatively small, so predictions may not always be accurate.
-
-### 📈 Latest Training Results
-
-The following results were obtained from the latest training run using 206 built-in sentences and a vocabulary of 363 words.
+The latest completed training run used 10,206 sentences, a vocabulary of 6,966 words, 123,496 training samples and 13,721 validation samples.
 
 | Model | Training Accuracy | Validation Accuracy | Top-3 Accuracy | Perplexity | Epochs |
 |---|---:|---:|---:|---:|---:|
-| RNN | 54% | 28% | 37% | 98.6 | 37 |
-| LSTM | 53% | 27% | 39% | 158.0 | 41 |
-| GRU | 31% | 23% | 32% | 122.9 | 34 |
-| BiLSTM | 62% | 26% | 34% | 215.7 | 41 |
+| RNN | 16% | 14% | 25% | 252.5 | 32 |
+| LSTM | 18% | 15% | 28% | 213.4 | 33 |
+| GRU | 17% | 15% | 27% | 210.4 | 32 |
+| BiLSTM | 17% | 15% | 27% | 212.5 | 32 |
 
-**Observations:**
-- RNN achieved the highest validation accuracy at 28% and the lowest perplexity at 98.6 in this run.
-- LSTM achieved the highest top-3 accuracy at 39%.
-- BiLSTM achieved the highest training accuracy at 62%, but its validation accuracy was 26%.
-- The difference between training and validation results suggests that generalization needs improvement.
+- 🏆 **Best validation accuracy:** LSTM and GRU/BiLSTM at approximately 15%.
+- 📌 **Best top-3 accuracy:** LSTM at 28%.
+- 📉 **Lowest perplexity:** GRU at 210.4.
 
-*Note: These are results from one training run on a relatively small dataset. They may vary when the models are retrained. Validation accuracy is not a guarantee of performance on unseen real-world text.*
-
-## ⚠️ Limitations
-
-- The training dataset contains a limited number of sentences.
-- Predictions may be unreliable for unfamiliar words or sentence patterns.
-- Generated sentences may contain repetitive or grammatically incorrect text.
-- The reported evaluation metrics should not be interpreted as guaranteed real-world performance.
+*Note: These are results from one training run. Prediction performance remains limited, so further improvements are needed.*
 
 ## 🚀 Future Enhancements
 
-- Expand the dataset with more diverse text.
-- Improve model generalization and prediction quality.
-- Tune hyperparameters and compare model architectures.
-- Add more evaluation examples and testing.
-- Deploy the Streamlit application online.
+- 📚 Improve dataset quality and vocabulary coverage.
+- ⚙️ Optimize model hyperparameters.
+- 📊 Evaluate models using a separate test dataset.
+- ⚡ Reduce training time through optimization and hardware acceleration.
+- ✍️ Improve text preprocessing and generated text quality.
+- 🤖 Explore Transformer-based architectures.
+- 📈 Add advanced visualizations for model comparison.
+- ☁️ Deploy the Streamlit application online.
+
+## ⚠️ Limitations
+
+- 🎯 Current validation accuracy is limited to approximately 14–15%.
+- 📚 The dataset may not represent all writing styles and topics.
+- 🧩 The models have limited contextual understanding.
+- 🔁 Repeated predictions may produce repetitive or grammatically incorrect text.
+- ⏳ Training all four models can take several hours.
+
+## 🎓 Learning Outcomes
+
+- Understanding recurrent neural network architectures.
+- Text preprocessing and sequence generation.
+- Training and evaluating deep learning models.
+- Saving and loading model artifacts.
+- Building interactive applications with Streamlit.
+- Comparing model performance and identifying limitations.
 
 ## 👨‍💻 Author
 
-**BhSarma**
+**Dasaratha Sarma**
 
-GitHub: [@BhSarma](https://github.com/BhSarma)
+🔗 GitHub: [BhSarma](https://github.com/BhSarma)
+
+📌 Project Repository: [Next Word Prediction Using RNN and LSTM](https://github.com/BhSarma/Next-Word-Prediction-Using-RNN-LSTM)
+ Next Word Prediction Using RNN, LSTM, GRU and BiLSTM
+
+## 🛠️ Technologies Used
+
+- 🐍 **Python** – Core programming language
+- 🧠 **TensorFlow & Keras** – Deep learning model development
+- 🔢 **NumPy** – Numerical computations
+- 🐼 **Pandas** – Data handling and processing
+- 📚 **NLTK** – Natural language processing and corpus resources
+- 🌐 **Streamlit** – Interactive web application
+- 💬 **NLP** – Text preprocessing and next-word prediction
+- 🤖 **Deep Learning** – Sequence modelling using recurrent neural networks
+
+## 📂 Project Structure
+
+```text
+Next-Word-Prediction-Using-RNN-LSTM/
+│
+├── 📁 artifacts/          # Saved models, vocabulary and metrics
+├── 📁 web/
+│   └── 🐍 app.py          # Streamlit web application
+├── 🐍 data.py             # Built-in training sentences
+├── 🐍 main.py             # Training and evaluation pipeline
+├── 📄 requirements.txt    # Project dependencies
+├── 📄 README.md           # Project documentation
+└── 📄 corpus.txt          # Optional text corpus
+```
+
+## ✨ Features
+
+- 🎯 Next-word prediction from user input
+- 🧠 Four models: RNN, LSTM, GRU and BiLSTM
+- 📊 Prediction confidence and alternative word suggestions
+- ✍️ Text generation using repeated next-word predictions
+- ⚖️ Side-by-side model comparison
+- 📈 Training results and evaluation metrics
+- 💾 Saved model artifacts for inference
+- 🔄 Model retraining support
+
+## 📊 Training Results
+
+The latest completed training run used 10,206 sentences, a vocabulary of 6,966 words, 123,496 training samples and 13,721 validation samples.
+
+| Model | Training Accuracy | Validation Accuracy | Top-3 Accuracy | Perplexity | Epochs |
+|---|---:|---:|---:|---:|---:|
+| RNN | 16% | 14% | 25% | 252.5 | 32 |
+| LSTM | 18% | 15% | 28% | 213.4 | 33 |
+| GRU | 17% | 15% | 27% | 210.4 | 32 |
+| BiLSTM | 17% | 15% | 27% | 212.5 | 32 |
+
+- 🏆 **Best validation accuracy:** LSTM and GRU/BiLSTM at approximately 15%.
+- 📌 **Best top-3 accuracy:** LSTM at 28%.
+- 📉 **Lowest perplexity:** GRU at 210.4.
+
+*Note: These are results from one training run. Prediction performance remains limited, so further improvements are needed.*
+
+## 🚀 Future Enhancements
+
+- 📚 Improve dataset quality and vocabulary coverage.
+- ⚙️ Optimize model hyperparameters.
+- 📊 Evaluate models using a separate test dataset.
+- ⚡ Reduce training time through optimization and hardware acceleration.
+- ✍️ Improve text preprocessing and generated text quality.
+- 🤖 Explore Transformer-based architectures.
+- 📈 Add advanced visualizations for model comparison.
+- ☁️ Deploy the Streamlit application online.
+
+## ⚠️ Limitations
+
+- 🎯 Current validation accuracy is limited to approximately 14–15%.
+- 📚 The dataset may not represent all writing styles and topics.
+- 🧩 The models have limited contextual understanding.
+- 🔁 Repeated predictions may produce repetitive or grammatically incorrect text.
+- ⏳ Training all four models can take several hours.
+
+## 🎓 Learning Outcomes
+
+- Understanding recurrent neural network architectures.
+- Text preprocessing and sequence generation.
+- Training and evaluating deep learning models.
+- Saving and loading model artifacts.
+- Building interactive applications with Streamlit.
+- Comparing model performance and identifying limitations.
+
+## 👨‍💻 Author
+
+**Dasaratha Sarma**
+
+🔗 GitHub: [BhSarma](https://github.com/BhSarma)
+
+📌 Project Repository: [Next Word Prediction Using RNN and LSTM](https://github.com/BhSarma/Next-Word-Prediction-Using-RNN-LSTM)
+ Next Word Prediction Using RNN, LSTM, GRU and BiLSTM
+
+## 🛠️ Technologies Used
+
+- 🐍 **Python** – Core programming language
+- 🧠 **TensorFlow & Keras** – Deep learning model development
+- 🔢 **NumPy** – Numerical computations
+- 🐼 **Pandas** – Data handling and processing
+- 📚 **NLTK** – Natural language processing and corpus resources
+- 🌐 **Streamlit** – Interactive web application
+- 💬 **NLP** – Text preprocessing and next-word prediction
+- 🤖 **Deep Learning** – Sequence modelling using recurrent neural networks
+
+## 📂 Project Structure
+
+```text
+Next-Word-Prediction-Using-RNN-LSTM/
+│
+├── 📁 artifacts/          # Saved models, vocabulary and metrics
+├── 📁 web/
+│   └── 🐍 app.py          # Streamlit web application
+├── 🐍 data.py             # Built-in training sentences
+├── 🐍 main.py             # Training and evaluation pipeline
+├── 📄 requirements.txt    # Project dependencies
+├── 📄 README.md           # Project documentation
+└── 📄 corpus.txt          # Optional text corpus
+```
+
+## ✨ Features
+
+- 🎯 Next-word prediction from user input
+- 🧠 Four models: RNN, LSTM, GRU and BiLSTM
+- 📊 Prediction confidence and alternative word suggestions
+- ✍️ Text generation using repeated next-word predictions
+- ⚖️ Side-by-side model comparison
+- 📈 Training results and evaluation metrics
+- 💾 Saved model artifacts for inference
+- 🔄 Model retraining support
+
+## 📊 Training Results
+
+The latest completed training run used 10,206 sentences, a vocabulary of 6,966 words, 123,496 training samples and 13,721 validation samples.
+
+| Model | Training Accuracy | Validation Accuracy | Top-3 Accuracy | Perplexity | Epochs |
+|---|---:|---:|---:|---:|---:|
+| RNN | 16% | 14% | 25% | 252.5 | 32 |
+| LSTM | 18% | 15% | 28% | 213.4 | 33 |
+| GRU | 17% | 15% | 27% | 210.4 | 32 |
+| BiLSTM | 17% | 15% | 27% | 212.5 | 32 |
+
+- 🏆 **Best validation accuracy:** LSTM and GRU/BiLSTM at approximately 15%.
+- 📌 **Best top-3 accuracy:** LSTM at 28%.
+- 📉 **Lowest perplexity:** GRU at 210.4.
+
+*Note: These are results from one training run. Prediction performance remains limited, so further improvements are needed.*
+
+## 🚀 Future Enhancements
+
+- 📚 Improve dataset quality and vocabulary coverage.
+- ⚙️ Optimize model hyperparameters.
+- 📊 Evaluate models using a separate test dataset.
+- ⚡ Reduce training time through optimization and hardware acceleration.
+- ✍️ Improve text preprocessing and generated text quality.
+- 🤖 Explore Transformer-based architectures.
+- 📈 Add advanced visualizations for model comparison.
+- ☁️ Deploy the Streamlit application online.
+
+## ⚠️ Limitations
+
+- 🎯 Current validation accuracy is limited to approximately 14–15%.
+- 📚 The dataset may not represent all writing styles and topics.
+- 🧩 The models have limited contextual understanding.
+- 🔁 Repeated predictions may produce repetitive or grammatically incorrect text.
+- ⏳ Training all four models can take several hours.
+
+## 🎓 Learning Outcomes
+
+- Understanding recurrent neural network architectures.
+- Text preprocessing and sequence generation.
+- Training and evaluating deep learning models.
+- Saving and loading model artifacts.
+- Building interactive applications with Streamlit.
+- Comparing model performance and identifying limitations.
+
+## 👨‍💻 Author
+
+**Dasaratha Sarma**
+
+🔗 GitHub: [BhSarma](https://github.com/BhSarma)
+
+📌 Project Repository: [Next Word Prediction Using RNN and LSTM](https://github.com/BhSarma/Next-Word-Prediction-Using-RNN-LSTM)
