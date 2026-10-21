@@ -210,3 +210,45 @@ SENTENCES = [
     "Next word prediction is a common language modeling task",
     "The project compares four recurrent neural network models",
 ]
+
+# ---------------------------------------------------------
+# Extend the existing dataset using the NLTK Gutenberg corpus
+# ---------------------------------------------------------
+
+import re
+import nltk
+
+try:
+    from nltk.corpus import gutenberg
+    gutenberg.fileids()
+except LookupError:
+    nltk.download("gutenberg", quiet=True)
+    from nltk.corpus import gutenberg
+
+# Keep the original sentences and add diverse text examples.
+existing_sentences = list(SENTENCES)
+
+extra_sentences = []
+seen = {s.strip().lower() for s in existing_sentences}
+
+for words in gutenberg.sents():
+    sentence = " ".join(words).strip()
+    sentence = re.sub(r"\s+", " ", sentence)
+
+    # Keep useful English sentences compatible with main.py tokenization.
+    tokens = re.findall(r"[a-z0-9']+", sentence.lower())
+
+    if 5 <= len(tokens) <= 30:
+        cleaned = " ".join(tokens)
+
+        if cleaned not in seen:
+            seen.add(cleaned)
+            extra_sentences.append(cleaned)
+
+        if len(extra_sentences) >= 10000:
+            break
+
+SENTENCES = existing_sentences + extra_sentences
+
+print(f"Total training sentences available: {len(SENTENCES)}")
+print(f"Additional corpus sentences: {len(extra_sentences)}")
